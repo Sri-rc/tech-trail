@@ -1,0 +1,17 @@
+/* Text shadow utilities */
+.text-shadow-hero {
+  text-shadow: var(--text-shadow-hero);
+}
+
+.text-shadow-subtle {
+  text-shadow: var(--text-shadow-subtle);
+}
+
+/* Letter spacing utilities */
+.tracking-nav {
+  letter-spacing: var(--letter-spacing-nav);
+}
+
+.tracking-subtitle {
+  letter-spacing: var(--letter-spacing-nav);
+}

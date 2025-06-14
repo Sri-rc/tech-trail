@@ -1,0 +1,188 @@
+/* Custom utility classes */
+.font-heading {
+  font-family: var(--font-heading);
+}
+
+.font-subtitle {
+  font-family: var(--font-subtitle);
+}
+
+.font-nav {
+  font-family: var(--font-nav);
+}
+
+/* Base class for heading-style typography */
+.text-heading-base {
+  font-family: var(--font-heading);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-neutral-dark);
+}
+
+/* Hero text styles */
+.text-hero-sm {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-5xl);
+  line-height: var(--line-height-snug);
+  font-weight: var(--font-weight-bold);
+}
+
+.text-hero-md {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-6xl);
+  line-height: var(--line-height-snug);
+  font-weight: var(--font-weight-bold);
+}
+
+.text-hero-lg {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-7xl);
+  line-height: var(--line-height-tight);
+  font-weight: var(--font-weight-bold);
+}
+
+.text-hero-xl {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-8xl);
+  line-height: var(--line-height-tight);
+  font-weight: var(--font-weight-bold);
+}
+
+/* About subtitle styles */
+.text-about-subtitle-sm {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-4xl);
+  line-height: var(--line-height-snug);
+  font-weight: var(--font-weight-bold);
+  color: #000000;
+}
+
+.text-about-subtitle-md {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-5xl);
+  line-height: var(--line-height-snug);
+  font-weight: var(--font-weight-bold);
+  color: #000000;
+}
+
+.text-about-subtitle-lg {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-6xl);
+  line-height: var(--line-height-tight);
+  font-weight: var(--font-weight-bold);
+  color: #000000;
+}
+
+.text-about-subtitle-xl {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-7xl);
+  line-height: var(--line-height-tight);
+  font-weight: var(--font-weight-bold);
+  color: #000000;
+}
+
+/* Subtitle styles */
+.text-subtitle-sm {
+  font-family: var(--font-nav);
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-comfortable);
+  font-weight: var(--font-weight-normal);
+  letter-spacing: var(--letter-spacing-widest);
+  text-transform: uppercase;
+  color: #FFFFFF;
+  text-shadow: var(--text-shadow-subtle);
+}
+
+.text-subtitle-md {
+  font-family: var(--font-nav);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-comfortable);
+  font-weight: var(--font-weight-normal);
+  letter-spacing: var(--letter-spacing-widest);
+  text-transform: uppercase;
+  color: #FFFFFF;
+  text-shadow: var(--text-shadow-subtle);
+}
+
+.text-subtitle-lg {
+  font-family: var(--font-nav);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-comfortable);
+  font-weight: var(--font-weight-normal);
+  letter-spacing: var(--letter-spacing-widest);
+  text-transform: uppercase;
+  color: #FFFFFF;
+  text-shadow: var(--text-shadow-subtle);
+}
+
+/* Base class for nav-style typography */
+.text-nav-base {
+  font-family: var(--font-nav);
+  line-height: var(--line-height-comfortable);
+  font-weight: var(--font-weight-normal);
+  letter-spacing: var(--letter-spacing-widest);
+  text-transform: uppercase;
+}
+
+/* Navigation text styles */
+.text-nav-sm {
+  font-size: var(--font-size-xs);
+  color: #FFFFFF;
+}
+
+.text-nav-md {
+  font-size: var(--font-size-sm);
+  color: #FFFFFF;
+}
+
+.text-nav-lg {
+  font-size: var(--font-size-sm);
+  color: #FFFFFF;
+}
+
+/* About title styles - use base class + size modifier */
+.text-about-title-sm {
+  font-size: var(--font-size-xs);
+  color: var(--color-primary-gold);
+}
+
+.text-about-title-md {
+  font-size: var(--font-size-sm);
+  color: var(--color-primary-gold);
+}
+
+.text-about-title-lg {
+  font-size: var(--font-size-sm);
+  color: var(--color-primary-gold);
+}
+
+/* Heading utilities - use base class + size modifier */
+.text-heading-xl {
+  font-size: var(--font-size-4xl);
+  line-height: var(--line-height-normal);
+}
+
+.text-heading-lg {
+  font-size: var(--font-size-3xl);
+  line-height: var(--line-height-relaxed);
+}
+
+.text-heading-md {
+  font-size: var(--font-size-2xl);
+  line-height: var(--line-height-relaxed);
+}
+
+.text-heading-sm {
+  font-size: var(--font-size-xl);
+  line-height: var(--line-height-loose);
+}
+
+/* Body text utilities */
+.text-body-lg {
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-spacious);
+}
+
+.text-body {
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-spacious);
+}

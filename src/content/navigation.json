@@ -1,0 +1,15 @@
+{
+  "header": {
+    "logo": "MK",
+    "navigation": [
+      { "text": "SHOP", "href": "/shop" },
+      { "text": "PLAN MY KITCHEN", "href": "/plan" },
+      { "text": "ABOUT US", "href": "/about" },
+      { "text": "GALLERY", "href": "/gallery" }
+    ],
+    "cta": {
+      "text": "MY ORDERS",
+      "href": "/orders"
+    }
+  }
+}

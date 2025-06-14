@@ -1,0 +1,130 @@
+{
+  "hero": {
+    "subtitle": "Design and order your new kitchen online today",
+    "title": "Bespoke & Made to Measure\nHandmade Kitchen Design",
+    "ctaButton": {
+      "text": "ORDER NOW",
+      "href": "/order"
+    },
+    "backgroundImage": {
+      "src": "/assets/images/Hero-Image.png",
+      "alt": "Modern bespoke kitchen design"
+    }
+  },
+  "about": {
+    "image": {
+      "src": "/assets/images/about-kitchen.png",
+      "alt": "Handmade kitchen interior"
+    },
+    "title": "Quality Craftmanship from build to delivery",
+    "subtitle": "Discover the beauty of a handmade kitchen",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eget est sit amet sapien venenatis maximus vel in urna. Nam mauris arcu, feugiat in finibus vitae, sollicitudin id purus. Ut imperdiet, magna eu pharetra tincidunt, mauris purus ultrices.",
+    "ctaButton": {
+      "text": "ABOUT US",
+      "href": "/about"
+    }
+  },
+  "experience": {
+    "subtitle": "OUR EXPERIENCE",
+    "title": "Over 35 years experience designing handmade kitchens",
+    "items": [
+      {
+        "testimonial": {
+          "quote": "Since my first contact I have received a very high level of customer service and advice with my kitchen plans. Ben responded very quickly to all of my emails and delivery of the kitchen was as planned.",
+          "author": "Jane",
+          "location": "Preston"
+        }
+      },
+      {
+        "testimonial": {
+          "quote": "The attention to detail and quality of craftsmanship exceeded our expectations. Our new kitchen has become the heart of our home, and we couldn't be happier with the results.",
+          "author": "Michael",
+          "location": "Manchester"
+        }
+      },
+      {
+        "testimonial": {
+          "quote": "Professional service from start to finish. The team was incredibly helpful throughout the design process and the installation was seamless. Highly recommended!",
+          "author": "Sarah",
+          "location": "Liverpool"
+        }
+      }
+    ],
+    "ctaButton": {
+      "text": "FREQUENTLY ASKED QUESTIONS",
+      "href": "/faq"
+    }
+  },
+  "gallery": {
+    "title": "Customer Gallery",
+    "subtitle": "",
+    "images": [
+      {
+        "id": "1",
+        "src": "/assets/images/gallery-img1.png",
+        "alt": "Modern kitchen with dark cabinets",
+        "title": "Contemporary Dark Oak Kitchen"
+      },
+      {
+        "id": "2",
+        "src": "/assets/images/gallery-img2.png",
+        "alt": "Traditional kitchen with wood finish",
+        "title": "Traditional Handcrafted Kitchen"
+      },
+      {
+        "id": "3",
+        "src": "/assets/images/gallery-img3.png",
+        "alt": "Minimalist white kitchen design",
+        "title": "Minimalist White Kitchen"
+      },
+      {
+        "id": "4",
+        "src": "/assets/images/gallery-img4.png",
+        "alt": "Industrial style kitchen",
+        "title": "Industrial Style Kitchen"
+      }
+    ],
+    "ctaButton": {
+      "text": "VIEW MORE",
+      "href": "/gallery"
+    }
+  },
+  "footer": {
+    "logo": "/assets/images/mk-logo.png",
+    "sections": [
+      {
+        "title": "About",
+        "links": [
+          { "text": "SHOP", "href": "/shop" },
+          { "text": "PLAN MY KITCHEN", "href": "/plan" },
+          { "text": "ABOUT US", "href": "/about" },
+          { "text": "GALLERY", "href": "/gallery" }
+        ]
+      },
+      {
+        "title": "Service",
+        "links": [
+          { "text": "FAQ", "href": "/faq" },
+          { "text": "CONTACT", "href": "/contact" },
+          { "text": "HOW TO BUY", "href": "/how-to-buy" },
+          { "text": "BROCHURE", "href": "/brochure" }
+        ]
+      },
+      {
+        "title": "Info",
+        "links": [
+          { "text": "DELIVERY", "href": "/delivery" },
+          { "text": "TERMS", "href": "/terms" },
+          { "text": "PRIVACY", "href": "/privacy" }
+        ]
+      }
+    ],
+    "social": [
+      { "platform": "Facebook", "href": "https://facebook.com", "icon": "/public/assets/icons/facebook.svg" },
+      { "platform": "Twitter", "href": "https://twitter.com", "icon": "/assets/icons/twitter.svg" },
+      { "platform": "Instagram", "href": "https://instagram.com", "icon": "/assets/icons/insta.svg" }
+    ],
+    "copyright": "Copyright © 2025 MK Handmade Kitchens - All rights reserved",
+    "disclaimer": "Handmade kitchen design, development & hosting by MK."
+  }
+}
