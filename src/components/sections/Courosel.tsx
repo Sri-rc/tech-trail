@@ -73,21 +73,7 @@ export default function ExperienceCarousel({ items }: Props) {
         </button>
       </div>
 
-      {/* Dots Indicator */}
-      <div className="flex justify-center space-x-2 mt-6">
-        {items.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => setCurrentIndex(index)}
-            className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-colors ${
-              index === currentIndex 
-                ? 'bg-primary-gold' 
-                : 'bg-neutral-text-light opacity-40'
-            }`}
-            aria-label={`Go to testimonial ${index + 1}`}
-          />
-        ))}
-      </div>
+
     </div>
   )
 }

@@ -110,6 +110,36 @@
     "ctaButton": {
       "text": "ABOUT US",
       "href": "/about"
+    },
+    "additionalImages": [
+      {
+        "id": "kitchen-1",
+        "src": "/assets/images/kitchen-1.jpg",
+        "alt": "Contemporary kitchen design with modern fixtures",
+        "title": "Contemporary Design"
+      },
+      {
+        "id": "kitchen-2",
+        "src": "/assets/images/kitchen-2.jpg",
+        "alt": "Traditional handcrafted kitchen with wooden cabinets",
+        "title": "Traditional Craftsmanship"
+      },
+      {
+        "id": "kitchen-3",
+        "src": "/assets/images/kitchen-3.jpg",
+        "alt": "Luxury kitchen with premium materials and finishes",
+        "title": "Luxury Finishes"
+      },
+      {
+        "id": "kitchen-4",
+        "src": "/assets/images/kitchen-4.jpg",
+        "alt": "Compact kitchen design maximizing space efficiency",
+        "title": "Space Optimization"
+      }
+    ],
+    "viewMoreButton": {
+      "text": "VIEW MORE",
+      "hideText": "SHOW LESS"
     }
   },
   "experience": {
@@ -149,32 +179,64 @@
     "images": [
       {
         "id": "1",
-        "src": "/assets/images/gallery-img1.png",
-        "alt": "Modern kitchen with dark cabinets",
+        "src": "/assets/images/gallery-img3.png",
+        "alt": "Contemporary kitchen design with sleek modern fixtures and premium finishes",
         "title": "Contemporary Dark Oak Kitchen"
       },
       {
         "id": "2",
-        "src": "/assets/images/gallery-img2.png",
-        "alt": "Traditional kitchen with wood finish",
+        "src": "/assets/images/gallery-img4.png",
+        "alt": "Traditional handcrafted kitchen featuring rich wood textures and classic details",
         "title": "Traditional Handcrafted Kitchen"
       },
       {
         "id": "3",
-        "src": "/assets/images/gallery-img3.png",
-        "alt": "Minimalist white kitchen design",
+        "src": "/assets/images/gallery-img1.png",
+        "alt": "Minimalist white kitchen design with clean lines and modern functionality",
         "title": "Minimalist White Kitchen"
       },
       {
         "id": "4",
-        "src": "/assets/images/gallery-img4.png",
-        "alt": "Industrial style kitchen",
+        "src": "/assets/images/gallery-img2.png",
+        "alt": "Industrial style kitchen with raw materials and modern industrial aesthetics",
         "title": "Industrial Style Kitchen"
+      },
+      {
+        "id": "5",
+        "src": "/assets/images/kitchen-1.jpg",
+        "alt": "Luxury kitchen with premium marble countertops and high-end appliances",
+        "title": "Luxury Marble Kitchen"
+      },
+      {
+        "id": "6",
+        "src": "/assets/images/kitchen-2.jpg",
+        "alt": "Rustic farmhouse kitchen with exposed beams and vintage charm",
+        "title": "Rustic Farmhouse Kitchen"
+      },
+      {
+        "id": "7",
+        "src": "/assets/images/kitchen-3.jpg",
+        "alt": "Modern Scandinavian kitchen with light woods and minimalist design",
+        "title": "Scandinavian Modern Kitchen"
+      },
+      {
+        "id": "8",
+        "src": "/assets/images/about-kitchen.png",
+        "alt": "Compact urban kitchen design maximizing space with clever storage solutions",
+        "title": "Compact Urban Kitchen"
       }
     ],
+    "displayConfig": {
+      "initialCount": 4,
+      "loadMoreCount": 4
+    },
     "ctaButton": {
       "text": "VIEW MORE",
       "href": "/gallery"
+    },
+    "viewMoreButton": {
+      "text": "VIEW MORE",
+      "hideText": "SHOW LESS"
     }
   },
   "footer": {

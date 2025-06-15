@@ -79,19 +79,34 @@ export interface HeroContent {
   };
 }
 
+export interface ImageContent {
+  src: string;
+  alt: string;
+}
+
+export interface AdditionalImage extends ImageContent {
+  id: string;
+  title: string;
+}
+
+export interface ButtonContent {
+  text: string;
+  href: string;
+}
+
+export interface ViewMoreButton {
+  text: string;
+  hideText: string;
+}
 
 export interface AboutContent {
-  image: {
-    src: string;
-    alt: string;
-  };
+  image: ImageContent;
   title: string;
   subtitle: string;
   description: string;
-  ctaButton: {
-    text: string;
-    href: string;
-  };
+  ctaButton: ButtonContent;
+  additionalImages: AdditionalImage[];
+  viewMoreButton: ViewMoreButton;
 }
 
 export interface ExperienceContent {
@@ -112,14 +127,21 @@ export interface ExperienceItem {
   }
 }
 
+export interface GalleryDisplayConfig {
+  initialCount: number;
+  loadMoreCount: number;
+}
+
 export interface GalleryContent {
   title: string;
   subtitle: string;
   images: GalleryImage[];
+  displayConfig?: GalleryDisplayConfig;
   ctaButton: {
     text: string;
     href: string;
   };
+  viewMoreButton: ViewMoreButton;
 }
 
 export interface GalleryImage {
