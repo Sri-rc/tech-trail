@@ -1,4 +1,4 @@
-# MK Handmade Kitchens - Next.js Application
+# MTC Handmade Kitchens - Next.js Application
 
 A modern, high-performance website for MK Handmade Kitchens built with Next.js 15, React 19, and Tailwind CSS v4. Features a responsive design system, performance optimizations, and accessibility-first approach.
 
