@@ -12,7 +12,7 @@ const roboto = Roboto({
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://yourdomain.com'),
   title: {
-    default: "MK Handmade Kitchens - Bespoke & Made to Measure Kitchen Design",
+    default: "MTC Handmade Kitchens - Bespoke & Made to Measure Kitchen Design",
     template: "%s | MK Handmade Kitchens"
   },
   description: "Design and order your new kitchen online today. Over 35 years experience designing handmade, bespoke kitchens. Quality craftsmanship from build to delivery.",
@@ -25,9 +25,9 @@ export const metadata: Metadata = {
     "kitchen planning",
     "handcrafted cabinets"
   ],
-  authors: [{ name: "MK Handmade Kitchens" }],
-  creator: "MK Handmade Kitchens",
-  publisher: "MK Handmade Kitchens",
+  authors: [{ name: "MTC Handmade Kitchens" }],
+  creator: "MTC Handmade Kitchens",
+  publisher: "MTC Handmade Kitchens",
   formatDetection: {
     email: false,
     address: false,
@@ -37,8 +37,8 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_GB",
     url: "/",
-    siteName: "MK Handmade Kitchens",
-    title: "MK Handmade Kitchens - Bespoke & Made to Measure Kitchen Design",
+    siteName: "MTC Handmade Kitchens",
+    title: "MTC Handmade Kitchens - Bespoke & Made to Measure Kitchen Design",
     description: "Design and order your new kitchen online today. Over 35 years experience designing handmade, bespoke kitchens.",
     images: [
       {
@@ -51,10 +51,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "MK Handmade Kitchens - Bespoke & Made to Measure Kitchen Design",
+    title: "MTC Handmade Kitchens - Bespoke & Made to Measure Kitchen Design",
     description: "Design and order your new kitchen online today. Over 35 years experience designing handmade, bespoke kitchens.",
     images: ["/assets/images/Hero-Image.png"],
-    creator: "@mkhandmadekitchens", // Replace with actual Twitter handle
+    creator: "@mTChandmadekitchens",
   },
   robots: {
     index: true,
@@ -68,10 +68,6 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    // Add your verification codes here
-    // google: "your-google-site-verification-code",
-    // yandex: "your-yandex-verification-code",
-    // yahoo: "your-yahoo-verification-code",
   },
   alternates: {
     canonical: "/",
