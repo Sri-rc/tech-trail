@@ -38,13 +38,9 @@ export interface NavigationLink {
   isExternal?: boolean;
 }
 
-export interface HeroContent {
-  subtitle: string;
+export interface HeroSlide {
   title: string;
-  ctaButton: {
-    text: string;
-    href: string;
-  };
+  subtitle: string;
   backgroundImage: {
     desktop: {
       src: string;
@@ -56,6 +52,33 @@ export interface HeroContent {
     };
   };
 }
+
+export interface HeroCarousel {
+  autoRotate: boolean;
+  interval: number;
+  slides: HeroSlide[];
+}
+
+export interface HeroContent {
+  subtitle: string;
+  title: string;
+  ctaButton: {
+    text: string;
+    href: string;
+  };
+  carousel?: HeroCarousel;
+  backgroundImage: {
+    desktop: {
+      src: string;
+      alt: string;
+    };
+    mobile: {
+      src: string;
+      alt: string;
+    };
+  };
+}
+
 
 export interface AboutContent {
   image: {

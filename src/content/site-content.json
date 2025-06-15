@@ -40,13 +40,61 @@
       "text": "ORDER NOW",
       "href": "/order"
     },
+    "carousel": {
+      "autoRotate": true,
+      "interval": 5000,
+      "slides": [
+        {
+          "title": "Bespoke & Made to Measure\nHandmade Kitchen Design",
+          "subtitle": "Design and order your new kitchen online today",
+          "backgroundImage": {
+            "desktop": {
+              "src": "/assets/images/Hero-Image.png",
+              "alt": "Modern bespoke kitchen design"
+            },
+            "mobile": {
+              "src": "/assets/images/Hero-Image.png",
+              "alt": "Contemporary kitchen design for mobile"
+            }
+          }
+        },
+        {
+          "title": "Premium Quality\nCrafted to Perfection",
+          "subtitle": "Experience luxury with our handcrafted kitchen solutions",
+          "backgroundImage": {
+            "desktop": {
+              "src": "/assets/images/kitchen-1.jpg",
+              "alt": "Premium kitchen craftsmanship"
+            },
+            "mobile": {
+              "src": "/assets/images/kitchen-1.jpg",
+              "alt": "Premium kitchen design for mobile"
+            }
+          }
+        },
+        {
+          "title": "Traditional Elegance\nModern Functionality",
+          "subtitle": "Bringing timeless design into contemporary living",
+          "backgroundImage": {
+            "desktop": {
+              "src": "/assets/images/kitchen-3.jpg",
+              "alt": "Traditional elegant kitchen design"
+            },
+            "mobile": {
+              "src": "/assets/images/kitchen-3.jpg",
+              "alt": "Traditional kitchen design for mobile"
+            }
+          }
+        }
+      ]
+    },
     "backgroundImage": {
       "desktop": {
         "src": "/assets/images/Hero-Image.png",
         "alt": "Modern bespoke kitchen design"
       },
       "mobile": {
-        "src": "/assets/images/gallery-img1.png",
+        "src": "/assets/images/about-kitchen.png",
         "alt": "Contemporary kitchen design for mobile"
       }
     }

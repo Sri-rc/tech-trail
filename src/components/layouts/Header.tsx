@@ -49,14 +49,14 @@ const SocialIcon = ({ platform, href, iconSrc }: SocialIconProps) => (
   </Link>
 );
 
-// Navigation Component - Reusable for both desktop and mobile
+// Navigation Component - Reusable for both desktop and mobile with nowrap
 const Navigation = ({ links, className = "", onClick }: NavigationProps) => (
   <nav className={className} role="navigation">
     {links.map((link, index) => (
       <Link
         key={`nav-${index}`}
         href={link.href}
-        className="text-nav-base text-nav-sm md:text-nav-md lg:text-nav-lg hover:text-primary-gold-hover transition-colors focus:outline-none focus:text-primary-gold"
+        className="text-nav-base text-nav-sm md:text-nav-md lg:text-nav-lg hover:text-primary-gold-hover transition-colors focus:outline-none focus:text-primary-gold whitespace-nowrap"
         onClick={onClick}
       >
         {link.text}
@@ -67,7 +67,7 @@ const Navigation = ({ links, className = "", onClick }: NavigationProps) => (
 
 // CTA Button Component - Reusable with cart icon
 const CTAButton = ({ text, cartIcon, className = "" }: CTAButtonProps) => (
-  <button className={`group flex items-center space-x-2 lg:space-x-3 px-4 lg:px-6 py-2 lg:py-3 border border-white text-white text-nav-base text-nav-sm md:text-nav-md lg:text-nav-lg hover:bg-white hover:text-neutral-text-dark transition-colors rounded-full focus:outline-none focus:ring-2 focus:ring-primary-gold focus:ring-offset-2 focus:ring-offset-transparent ${className}`}>
+  <button className={`group flex items-center space-x-2 lg:space-x-3 px-4 lg:px-6 py-2 lg:py-3 border border-white text-white text-nav-base text-nav-sm md:text-nav-md lg:text-nav-lg hover:bg-white hover:text-neutral-text-dark transition-colors rounded-full focus:outline-none focus:ring-2 focus:ring-primary-gold focus:ring-offset-2 focus:ring-offset-transparent whitespace-nowrap ${className}`}>
     <span>{text}</span>
     <Image
       src={cartIcon.src}
@@ -164,75 +164,101 @@ export default function Header({ content }: Props) {
     <>
       <header className="bg-transparent absolute top-0 left-0 right-0 z-50 pt-7 pb-7" role="banner">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-20 relative">
-            {/* Left Section - Social Icons + Navigation */}
-            <div className="hidden lg:flex items-center space-x-12 xl:space-x-20">
-              {/* Social Media Icons */}
-              {content.social && content.social.length > 0 && (
-                <div className="flex space-x-2" role="list">
-                  {content.social.map((social, index) => (
-                    <SocialIcon
-                      key={`social-${index}`}
-                      platform={social.platform}
-                      href={social.href}
-                      iconSrc={social.icon}
-                    />
-                  ))}
-                </div>
-              )}
-
-              {/* Left Navigation */}
-              {content.navigation?.left && (
-                <Navigation
-                  links={content.navigation.left}
-                  className="flex space-x-6 xl:space-x-8"
-                />
-              )}
-            </div>
-
-            {/* Center Logo */}
-            <div className="absolute left-1/2 transform -translate-x-1/2 lg:relative lg:left-auto lg:transform-none lg:flex-shrink-0">
-              <Link
-                href={content.logo.href}
-                className="block hover:opacity-90 transition-opacity focus:outline-none focus:ring-2 focus:ring-primary-gold focus:ring-offset-2 focus:ring-offset-transparent"
-                aria-label="Go to homepage"
-              >
-                <Image
-                  src={content.logo.src}
-                  alt={content.logo.alt}
-                  width={84}
-                  height={33}
-                  priority={true}
-                  quality={95}
-                  sizes="(max-width: 640px) 60px, (max-width: 768px) 70px, (max-width: 1024px) 80px, 84px"
-                  className="w-auto h-7 sm:h-8 md:h-8 lg:h-8 xl:h-8 2xl:h-8 object-contain"
-                />
-              </Link>
-            </div>
-
-            {/* Right Section - Navigation + CTA */}
-            <div className="hidden lg:flex items-center space-x-12 xl:space-x-20">
-              {/* Right Navigation */}
-              {content.navigation?.right && (
-                <Navigation
-                  links={content.navigation.right}
-                  className="flex space-x-6 xl:space-x-8"
-                />
-              )}
-
-              {/* CTA Button with Cart Icon */}
-              <CTAButton
-                text={content.cta.text}
-                cartIcon={content.cta.cartIcon}
+          <div className="h-20 relative">
+            {/* Mobile Layout - Logo left, hamburger right */}
+            <div className="flex justify-between items-center h-full lg:hidden">
+              <div className="flex items-center">
+                <Link
+                  href={content.logo.href}
+                  className="block hover:opacity-90 transition-opacity focus:outline-none focus:ring-2 focus:ring-primary-gold focus:ring-offset-2 focus:ring-offset-transparent"
+                  aria-label="Go to homepage"
+                >
+                  <Image
+                    src={content.logo.src}
+                    alt={content.logo.alt}
+                    width={84}
+                    height={33}
+                    priority={true}
+                    quality={95}
+                    sizes="(max-width: 640px) 60px, (max-width: 768px) 70px, (max-width: 1024px) 80px, 84px"
+                    className="w-auto h-7 sm:h-8 md:h-8 object-contain"
+                  />
+                </Link>
+              </div>
+              
+              <MobileMenuToggle
+                isOpen={isMenuOpen}
+                onClick={handleMenuToggle}
+                toggleLabel={content.mobileMenu.toggleLabel}
               />
             </div>
 
-            {/* Mobile menu button */}
-            <MobileMenuToggle
-              isOpen={isMenuOpen}
-              onClick={handleMenuToggle}
-              toggleLabel={content.mobileMenu.toggleLabel}
-            />
+            {/* Desktop Layout - 3 column grid for perfect centering */}
+            <div className="hidden lg:grid lg:grid-cols-3 lg:gap-2 xl:gap-4 lg:items-center h-full">
+              {/* Left Section - Social Icons + Navigation */}
+              <div className="flex items-center space-x-8 xl:space-x-12 2xl:space-x-16">
+                {/* Social Media Icons */}
+                {content.social && content.social.length > 0 && (
+                  <div className="flex space-x-2 flex-shrink-0" role="list">
+                    {content.social.map((social, index) => (
+                      <SocialIcon
+                        key={`social-${index}`}
+                        platform={social.platform}
+                        href={social.href}
+                        iconSrc={social.icon}
+                      />
+                    ))}
+                  </div>
+                )}
+
+                {/* Left Navigation */}
+                {content.navigation?.left && (
+                  <Navigation
+                    links={content.navigation.left}
+                    className="flex space-x-4 xl:space-x-6 2xl:space-x-8"
+                  />
+                )}
+              </div>
+
+              {/* Center Logo - Perfectly centered */}
+              <div className="flex justify-center">
+                <Link
+                  href={content.logo.href}
+                  className="block hover:opacity-90 transition-opacity focus:outline-none focus:ring-2 focus:ring-primary-gold focus:ring-offset-2 focus:ring-offset-transparent"
+                  aria-label="Go to homepage"
+                >
+                  <Image
+                    src={content.logo.src}
+                    alt={content.logo.alt}
+                    width={84}
+                    height={33}
+                    priority={true}
+                    quality={95}
+                    sizes="84px"
+                    className="w-auto h-8 xl:h-8 2xl:h-8 object-contain"
+                  />
+                </Link>
+              </div>
+
+              {/* Right Section - Navigation + CTA */}
+              <div className="flex items-center justify-end space-x-8 xl:space-x-12 2xl:space-x-16">
+                {/* Right Navigation */}
+                {content.navigation?.right && (
+                  <Navigation
+                    links={content.navigation.right}
+                    className="flex space-x-4 xl:space-x-6 2xl:space-x-8"
+                  />
+                )}
+
+                {/* CTA Button with Cart Icon */}
+                <div className="flex-shrink-0">
+                  <CTAButton
+                    text={content.cta.text}
+                    cartIcon={content.cta.cartIcon}
+                  />
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* Underline spanning content width */}
