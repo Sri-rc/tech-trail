@@ -1,3 +1,6 @@
+/**
+ * Main site content structure containing all page sections
+ */
 export interface SiteContent {
   header: HeaderContent;
   hero: HeroContent;
@@ -8,6 +11,9 @@ export interface SiteContent {
   notFound: notFound;
 }
 
+/**
+ * Header component content including navigation, logo, and social links
+ */
 export interface HeaderContent {
   logo: {
     src: string;
@@ -32,12 +38,18 @@ export interface HeaderContent {
   };
 }
 
+/**
+ * Individual navigation link with text and destination
+ */
 export interface NavigationLink {
   text: string;
   href: string;
   isExternal?: boolean;
 }
 
+/**
+ * Individual slide content for hero carousel
+ */
 export interface HeroSlide {
   title: string;
   subtitle: string;
@@ -53,12 +65,18 @@ export interface HeroSlide {
   };
 }
 
+/**
+ * Hero carousel configuration and slide data
+ */
 export interface HeroCarousel {
   autoRotate: boolean;
   interval: number;
   slides: HeroSlide[];
 }
 
+/**
+ * Hero section content with title, CTA, and background imagery
+ */
 export interface HeroContent {
   subtitle: string;
   title: string;
@@ -79,26 +97,41 @@ export interface HeroContent {
   };
 }
 
+/**
+ * Basic image content with source and alt text
+ */
 export interface ImageContent {
   src: string;
   alt: string;
 }
 
+/**
+ * Extended image content with unique identifier and title
+ */
 export interface AdditionalImage extends ImageContent {
   id: string;
   title: string;
 }
 
+/**
+ * Call-to-action button with text and destination
+ */
 export interface ButtonContent {
   text: string;
   href: string;
 }
 
+/**
+ * Toggle button for expanding/collapsing content sections
+ */
 export interface ViewMoreButton {
   text: string;
   hideText: string;
 }
 
+/**
+ * About section content including description, images, and CTA
+ */
 export interface AboutContent {
   image: ImageContent;
   title: string;
@@ -109,6 +142,9 @@ export interface AboutContent {
   viewMoreButton: ViewMoreButton;
 }
 
+/**
+ * Experience section content with testimonials and company history
+ */
 export interface ExperienceContent {
   subtitle: string
   title: string
@@ -119,6 +155,9 @@ export interface ExperienceContent {
   }
 }
 
+/**
+ * Individual experience/testimonial item with customer feedback
+ */
 export interface ExperienceItem {
   testimonial: {
     quote: string
@@ -127,11 +166,17 @@ export interface ExperienceItem {
   }
 }
 
+/**
+ * Gallery display configuration for image loading behavior
+ */
 export interface GalleryDisplayConfig {
   initialCount: number;
   loadMoreCount: number;
 }
 
+/**
+ * Gallery section content with image collection and display settings
+ */
 export interface GalleryContent {
   title: string;
   subtitle: string;
@@ -144,6 +189,9 @@ export interface GalleryContent {
   viewMoreButton: ViewMoreButton;
 }
 
+/**
+ * Individual gallery image with metadata and optional title
+ */
 export interface GalleryImage {
   id: string;
   src: string;
@@ -151,6 +199,9 @@ export interface GalleryImage {
   title?: string;
 }
 
+/**
+ * Footer content including logo, navigation sections, and legal text
+ */
 export interface FooterContent {
   logo: string;
   sections: FooterSection[];
@@ -158,23 +209,35 @@ export interface FooterContent {
   disclaimer: string;
 }
 
+/**
+ * Footer section containing links or social media icons
+ */
 export interface FooterSection {
   title: string;
   links?: FooterLink[];
   social?: SocialLink[];
 }
 
+/**
+ * Individual footer navigation link
+ */
 export interface FooterLink {
   text: string;
   href: string;
 }
 
+/**
+ * Social media platform link with icon
+ */
 export interface SocialLink {
   platform: string;
   href: string;
   icon: string;
 }
 
+/**
+ * 404 Not Found page content with error messaging and navigation options
+ */
 export interface notFound {
   title: string;
   subtitle: string;

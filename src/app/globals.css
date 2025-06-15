@@ -9,3 +9,42 @@
 @import "../styles/utilities/effects.css";
 
 /* Import Pges */
+
+/* Safe area support for devices with notches */
+.safe-area-inset-top {
+  padding-top: max(1.75rem, env(safe-area-inset-top));
+}
+
+/* Support for older browsers that don't have env() */
+@supports not (padding: max(0px)) {
+  .safe-area-inset-top {
+    padding-top: 1.75rem;
+  }
+}
+
+/* Ensure proper spacing on devices with dynamic island */
+@media screen and (min-width: 390px) and (max-height: 844px) and (orientation: portrait) {
+  .safe-area-inset-top {
+    padding-top: max(2rem, env(safe-area-inset-top));
+  }
+}
+
+/* Enhanced backdrop blur support */
+@supports (backdrop-filter: blur(12px)) {
+  .header-scrolled {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+}
+
+/* Smooth header transitions */
+.header-transition {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Dark header shadow enhancement */
+.header-dark-shadow {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 
+              0 2px 4px -1px rgba(0, 0, 0, 0.06),
+              0 0 0 1px rgba(255, 255, 255, 0.05);
+}

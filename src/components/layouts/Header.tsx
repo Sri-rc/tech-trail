@@ -3,9 +3,11 @@ import { useState, useCallback, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { HeaderContent } from "@/content/types";
+import { useScrollDirection } from "../hooks/useScroll";
 
 interface Props {
   content: HeaderContent;
+  className?: string;
 }
 
 interface SocialIconProps {
@@ -18,6 +20,7 @@ interface NavigationProps {
   links: Array<{ text: string; href: string }>;
   className?: string;
   onClick?: () => void;
+  isScrolled?: boolean; // Add prop to handle scrolled state styling
 }
 
 interface CTAButtonProps {
@@ -27,6 +30,7 @@ interface CTAButtonProps {
     alt: string;
   };
   className?: string;
+  isScrolled?: boolean; // Add prop to handle scrolled state styling
 }
 
 // Social Icon Component - Reusable and accessible
@@ -49,14 +53,27 @@ const SocialIcon = ({ platform, href, iconSrc }: SocialIconProps) => (
   </Link>
 );
 
-// Navigation Component - Reusable for both desktop and mobile with nowrap
-const Navigation = ({ links, className = "", onClick }: NavigationProps) => (
+// Navigation Component - Updated with scrolled state styling
+const Navigation = ({
+  links,
+  className = "",
+  onClick,
+  isScrolled = false,
+}: NavigationProps) => (
   <nav className={className} role="navigation">
     {links.map((link, index) => (
       <Link
         key={`nav-${index}`}
         href={link.href}
-        className="text-nav-base text-nav-sm md:text-nav-md lg:text-nav-lg hover:text-primary-gold-hover transition-colors focus:outline-none focus:text-primary-gold whitespace-nowrap"
+        className={`
+          text-nav-base text-nav-sm md:text-nav-md lg:text-nav-lg 
+          transition-colors focus:outline-none whitespace-nowrap
+          ${
+            isScrolled
+              ? "text-white hover:text-primary-gold-hover focus:text-primary-gold"
+              : "text-white hover:text-primary-gold-hover focus:text-primary-gold"
+          }
+        `}
         onClick={onClick}
       >
         {link.text}
@@ -65,9 +82,27 @@ const Navigation = ({ links, className = "", onClick }: NavigationProps) => (
   </nav>
 );
 
-// CTA Button Component - Reusable with cart icon
-const CTAButton = ({ text, cartIcon, className = "" }: CTAButtonProps) => (
-  <button className={`group flex items-center space-x-2 lg:space-x-3 px-4 lg:px-6 py-2 lg:py-3 border border-white text-white text-nav-base text-nav-sm md:text-nav-md lg:text-nav-lg hover:bg-white hover:text-neutral-text-dark transition-colors rounded-full focus:outline-none focus:ring-2 focus:ring-primary-gold focus:ring-offset-2 focus:ring-offset-transparent whitespace-nowrap ${className}`}>
+// CTA Button Component - Updated with scrolled state styling
+const CTAButton = ({
+  text,
+  cartIcon,
+  className = "",
+  isScrolled = false,
+}: CTAButtonProps) => (
+  <button
+    className={`
+    group flex items-center space-x-2 lg:space-x-3 px-4 lg:px-6 py-2 lg:py-3 
+    text-nav-base text-nav-sm md:text-nav-md lg:text-nav-lg 
+    transition-colors rounded-full focus:outline-none focus:ring-2 focus:ring-primary-gold 
+    focus:ring-offset-2 focus:ring-offset-transparent whitespace-nowrap
+    ${
+      isScrolled
+        ? "border border-white text-white hover:bg-white hover:text-neutral-text-dark"
+        : "border border-white text-white hover:bg-white hover:text-neutral-text-dark"
+    }
+    ${className}
+  `}
+  >
     <span>{text}</span>
     <Image
       src={cartIcon.src}
@@ -79,15 +114,17 @@ const CTAButton = ({ text, cartIcon, className = "" }: CTAButtonProps) => (
   </button>
 );
 
-// Mobile Menu Toggle Button - Accessible hamburger menu
-const MobileMenuToggle = ({ 
-  isOpen, 
-  onClick, 
-  toggleLabel 
-}: { 
-  isOpen: boolean; 
-  onClick: () => void; 
+// Mobile Menu Toggle Button - Updated with scrolled state styling
+const MobileMenuToggle = ({
+  isOpen,
+  onClick,
+  toggleLabel,
+  isScrolled = false,
+}: {
+  isOpen: boolean;
+  onClick: () => void;
   toggleLabel: string;
+  isScrolled?: boolean;
 }) => (
   <button
     className="lg:hidden focus:outline-none focus:ring-2 focus:ring-primary-gold focus:ring-offset-2 focus:ring-offset-transparent z-50 relative"
@@ -96,9 +133,27 @@ const MobileMenuToggle = ({
     aria-expanded={isOpen}
   >
     <div className="w-6 h-6 flex flex-col justify-center">
-      <span className={`block w-full h-0.5 bg-white mb-1 transition-all duration-300 ${isOpen ? 'transform rotate-45 translate-y-1.5' : ''}`}></span>
-      <span className={`block w-full h-0.5 bg-white mb-1 transition-all duration-300 ${isOpen ? 'opacity-0' : ''}`}></span>
-      <span className={`block w-full h-0.5 bg-white transition-all duration-300 ${isOpen ? 'transform -rotate-45 -translate-y-1.5' : ''}`}></span>
+      <span
+        className={`
+        block w-full h-0.5 mb-1 transition-all duration-300 
+        ${isScrolled ? "bg-white" : "bg-white"}
+        ${isOpen ? "transform rotate-45 translate-y-1.5" : ""}
+      `}
+      ></span>
+      <span
+        className={`
+        block w-full h-0.5 mb-1 transition-all duration-300 
+        ${isScrolled ? "bg-white" : "bg-white"}
+        ${isOpen ? "opacity-0" : ""}
+      `}
+      ></span>
+      <span
+        className={`
+        block w-full h-0.5 transition-all duration-300 
+        ${isScrolled ? "bg-white" : "bg-white"}
+        ${isOpen ? "transform -rotate-45 -translate-y-1.5" : ""}
+      `}
+      ></span>
     </div>
   </button>
 );
@@ -110,18 +165,37 @@ const CloseButton = ({ onClick }: { onClick: () => void }) => (
     className="absolute top-6 right-6 p-2 text-white hover:text-primary-gold focus:outline-none focus:ring-2 focus:ring-primary-gold focus:ring-offset-2 focus:ring-offset-neutral-dark transition-colors"
     aria-label="Close menu"
   >
-    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+    <svg
+      className="w-6 h-6"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M6 18L18 6M6 6l12 12"
+      />
     </svg>
   </button>
 );
 
-export default function Header({ content }: Props) {
+export default function Header({ content, className = "" }: Props) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  // Custom hook for scroll direction detection
+  const { scrollDirection, isAtTop } = useScrollDirection({
+    threshold: 15, // Minimum scroll distance to trigger direction change
+    debounceMs: 10, // Smooth 100fps for fluid animation
+  });
+
+  // Determine header visibility based on scroll behavior
+  const isHeaderVisible = isAtTop || scrollDirection === "up" || isMenuOpen;
 
   // Memoized toggle handler for performance
   const handleMenuToggle = useCallback(() => {
-    setIsMenuOpen(prev => !prev);
+    setIsMenuOpen((prev) => !prev);
   }, []);
 
   const handleMobileNavClick = useCallback(() => {
@@ -131,40 +205,58 @@ export default function Header({ content }: Props) {
   // Prevent body scroll when mobile menu is open
   useEffect(() => {
     if (isMenuOpen) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = "unset";
     }
 
     // Cleanup on unmount
     return () => {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = "unset";
     };
   }, [isMenuOpen]);
 
   // Close menu on escape key
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && isMenuOpen) {
+      if (e.key === "Escape" && isMenuOpen) {
         setIsMenuOpen(false);
       }
     };
 
-    document.addEventListener('keydown', handleEscape);
-    return () => document.removeEventListener('keydown', handleEscape);
+    document.addEventListener("keydown", handleEscape);
+    return () => document.removeEventListener("keydown", handleEscape);
   }, [isMenuOpen]);
 
   // Error boundary for missing content
   if (!content) {
-    console.warn('Header: Missing required content data');
+    console.warn("Header: Missing required content data");
     return null;
   }
 
   return (
     <>
-      <header className="bg-transparent absolute top-0 left-0 right-0 z-50 pt-7 pb-7" role="banner">
+      <header
+        className={`
+          fixed top-0 left-0 right-0 z-50 
+          transition-all duration-300 ease-in-out
+          ${isHeaderVisible ? "translate-y-0" : "-translate-y-full"}
+          ${
+            isAtTop
+              ? "bg-transparent pt-7 pb-7"
+              : "bg-neutral-dark/65 backdrop-blur-sm pt-4 pb-4 shadow-lg border-b border-white/10"
+          }
+          safe-area-inset-top 
+          ${className}
+        `}
+        role="banner"
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="h-20 relative">
+          <div
+            className={`relative transition-all duration-300 ${
+              isAtTop ? "h-20" : "h-16"
+            }`}
+          >
             {/* Mobile Layout - Logo left, hamburger right */}
             <div className="flex justify-between items-center h-full lg:hidden">
               <div className="flex items-center">
@@ -181,15 +273,18 @@ export default function Header({ content }: Props) {
                     priority={true}
                     quality={95}
                     sizes="(max-width: 640px) 60px, (max-width: 768px) 70px, (max-width: 1024px) 80px, 84px"
-                    className="w-auto h-7 sm:h-8 md:h-8 object-contain"
+                    className={`w-auto object-contain transition-all duration-300 ${
+                      isAtTop ? "h-7 sm:h-8 md:h-8" : "h-6 sm:h-7 md:h-7"
+                    }`}
                   />
                 </Link>
               </div>
-              
+
               <MobileMenuToggle
                 isOpen={isMenuOpen}
                 onClick={handleMenuToggle}
                 toggleLabel={content.mobileMenu.toggleLabel}
+                isScrolled={!isAtTop}
               />
             </div>
 
@@ -216,6 +311,7 @@ export default function Header({ content }: Props) {
                   <Navigation
                     links={content.navigation.left}
                     className="flex space-x-4 xl:space-x-6 2xl:space-x-8"
+                    isScrolled={!isAtTop}
                   />
                 )}
               </div>
@@ -235,7 +331,9 @@ export default function Header({ content }: Props) {
                     priority={true}
                     quality={95}
                     sizes="84px"
-                    className="w-auto h-8 xl:h-8 2xl:h-8 object-contain"
+                    className={`w-auto object-contain transition-all duration-300 ${
+                      isAtTop ? "h-8 xl:h-8 2xl:h-8" : "h-6 xl:h-7 2xl:h-7"
+                    }`}
                   />
                 </Link>
               </div>
@@ -247,6 +345,7 @@ export default function Header({ content }: Props) {
                   <Navigation
                     links={content.navigation.right}
                     className="flex space-x-4 xl:space-x-6 2xl:space-x-8"
+                    isScrolled={!isAtTop}
                   />
                 )}
 
@@ -255,14 +354,20 @@ export default function Header({ content }: Props) {
                   <CTAButton
                     text={content.cta.text}
                     cartIcon={content.cta.cartIcon}
+                    isScrolled={!isAtTop}
                   />
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Underline spanning content width */}
-          <div className="h-px opacity-50 bg-white mt-3" aria-hidden="true"></div>
+          {/* Underline spanning content width - only show when at top */}
+          {isAtTop && (
+            <div
+              className="h-px opacity-50 bg-white mt-3 transition-opacity duration-300"
+              aria-hidden="true"
+            ></div>
+          )}
         </div>
       </header>
 
@@ -270,14 +375,14 @@ export default function Header({ content }: Props) {
       {isMenuOpen && (
         <>
           {/* Backdrop */}
-          <div 
+          <div
             className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 lg:hidden"
             onClick={handleMobileNavClick}
             aria-hidden="true"
           />
-          
+
           {/* Mobile Menu */}
-          <div 
+          <div
             className="fixed inset-y-0 right-0 w-full max-w-sm bg-neutral-dark z-50 lg:hidden transform transition-transform duration-300 ease-in-out"
             role="dialog"
             aria-modal="true"
@@ -286,10 +391,13 @@ export default function Header({ content }: Props) {
             <div className="flex flex-col h-full">
               {/* Close Button */}
               <CloseButton onClick={handleMobileNavClick} />
-              
+
               {/* Menu Header */}
               <div className="pt-16 pb-6 px-6 border-b border-white/10">
-                <h2 id="mobile-menu-title" className="text-nav-base text-nav-md text-white">
+                <h2
+                  id="mobile-menu-title"
+                  className="text-nav-base text-nav-md text-white"
+                >
                   Menu
                 </h2>
               </div>
@@ -304,10 +412,11 @@ export default function Header({ content }: Props) {
                         links={content.navigation.left}
                         className="flex flex-col space-y-4"
                         onClick={handleMobileNavClick}
+                        isScrolled={true} // Always use scrolled styling in mobile menu
                       />
                     </div>
                   )}
-                  
+
                   {/* Right Navigation */}
                   {content.navigation?.right && (
                     <div>
@@ -315,6 +424,7 @@ export default function Header({ content }: Props) {
                         links={content.navigation.right}
                         className="flex flex-col space-y-4"
                         onClick={handleMobileNavClick}
+                        isScrolled={true} // Always use scrolled styling in mobile menu
                       />
                     </div>
                   )}
@@ -325,6 +435,7 @@ export default function Header({ content }: Props) {
                       text={content.cta.text}
                       cartIcon={content.cta.cartIcon}
                       className="w-full justify-center"
+                      isScrolled={true} // Always use scrolled styling in mobile menu
                     />
                   </div>
                 </div>
