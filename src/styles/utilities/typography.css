@@ -1,3 +1,4 @@
+
 /* Custom utility classes */
 .font-heading {
   font-family: var(--font-heading);
@@ -18,10 +19,42 @@
   color: var(--color-neutral-dark);
 }
 
+/* Base class for heading-style typography on dark backgrounds */
+.text-heading-base-dark {
+  font-family: var(--font-heading);
+  font-weight: var(--font-weight-bold);
+  color: #FFFFFF;
+}
+
+/* Footer section title styles - Responsive Helvetica bold */
+.text-footer-title-sm {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-lg);        /* 18px */
+  line-height: var(--line-height-normal);
+  font-weight: var(--font-weight-bold);
+  color: #FFFFFF;
+}
+
+.text-footer-title-md {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-xl);        /* 20px */
+  line-height: var(--line-height-normal);
+  font-weight: var(--font-weight-bold);
+  color: #FFFFFF;
+}
+
+.text-footer-title-lg {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-2xl);       /* 24px */
+  line-height: var(--line-height-normal);
+  font-weight: var(--font-weight-bold);
+  color: #FFFFFF;
+}
+
 /* Hero text styles */
 .text-hero-sm {
   font-family: var(--font-heading);
-  font-size: var(--font-size-5xl);
+  font-size: var(--font-size-4xl);
   line-height: var(--line-height-snug);
   font-weight: var(--font-weight-bold);
 }
@@ -46,6 +79,8 @@
   line-height: var(--line-height-tight);
   font-weight: var(--font-weight-bold);
 }
+
+
 
 /* About subtitle styles */
 .text-about-subtitle-sm {
@@ -111,6 +146,40 @@
   letter-spacing: var(--letter-spacing-widest);
   text-transform: uppercase;
   color: #FFFFFF;
+  text-shadow: var(--text-shadow-subtle);
+}
+
+/* Error subtitle styles for dark backgrounds */
+.text-error-subtitle-sm {
+  font-family: var(--font-nav);
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-comfortable);
+  font-weight: var(--font-weight-normal);
+  letter-spacing: var(--letter-spacing-widest);
+  text-transform: uppercase;
+  color: var(--color-status-error);
+  text-shadow: var(--text-shadow-subtle);
+}
+
+.text-error-subtitle-md {
+  font-family: var(--font-nav);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-comfortable);
+  font-weight: var(--font-weight-normal);
+  letter-spacing: var(--letter-spacing-widest);
+  text-transform: uppercase;
+  color: var(--color-status-error);
+  text-shadow: var(--text-shadow-subtle);
+}
+
+.text-error-subtitle-lg {
+  font-family: var(--font-nav);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-comfortable);
+  font-weight: var(--font-weight-normal);
+  letter-spacing: var(--letter-spacing-widest);
+  text-transform: uppercase;
+  color: var(--color-status-error);
   text-shadow: var(--text-shadow-subtle);
 }
 
@@ -185,4 +254,21 @@
 .text-body {
   font-size: var(--font-size-base);
   line-height: var(--line-height-spacious);
+}
+
+/* Body text utilities for dark backgrounds */
+.text-body-lg-dark {
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-spacious);
+  color: #FFFFFF;
+}
+
+.text-body-dark {
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-spacious);
+  color: #FFFFFF;
+}
+
+.normal-case {
+  text-transform: none;
 }

@@ -1,4 +1,38 @@
 {
+  "header": {
+    "logo": {
+      "src": "/assets/images/mk-logo.png",
+      "alt": "MTC - Modern Kitchen Solutions Logo",
+      "href": "/"
+    },
+    "navigation": {
+      "left": [
+        { "text": "SHOP", "href": "/shop" },
+        { "text": "PLAN MY KITCHEN", "href": "/plan" }
+      ],
+      "right": [
+        { "text": "ABOUT US", "href": "/about" },
+        { "text": "GALLERY", "href": "/gallery" }
+      ]
+    },
+    "social": [
+      { "platform": "Facebook", "href": "https://facebook.com", "icon": "/assets/icons/facebook.svg" },
+      { "platform": "Twitter", "href": "https://twitter.com", "icon": "/assets/icons/twitter.svg" },
+      { "platform": "Instagram", "href": "https://instagram.com", "icon": "/assets/icons/insta.svg" }
+    ],
+    "cta": {
+      "text": "MY ORDER",
+      "cartIcon": {
+        "src": "/assets/images/shopping-cart.png",
+        "alt": "Shopping Cart"
+      }
+    },
+    "mobileMenu": {
+      "toggleLabel": "Toggle mobile menu",
+      "openLabel": "Open main menu"
+    }
+  },
+  
   "hero": {
     "subtitle": "Design and order your new kitchen online today",
     "title": "Bespoke & Made to Measure\nHandmade Kitchen Design",
@@ -7,8 +41,14 @@
       "href": "/order"
     },
     "backgroundImage": {
-      "src": "/assets/images/Hero-Image.png",
-      "alt": "Modern bespoke kitchen design"
+      "desktop": {
+        "src": "/assets/images/Hero-Image.png",
+        "alt": "Modern bespoke kitchen design"
+      },
+      "mobile": {
+        "src": "/assets/images/gallery-img1.png",
+        "alt": "Contemporary kitchen design for mobile"
+      }
     }
   },
   "about": {
@@ -117,14 +157,66 @@
           { "text": "TERMS", "href": "/terms" },
           { "text": "PRIVACY", "href": "/privacy" }
         ]
+      },
+      {
+        "title": "Follow",
+        "social": [
+          { "platform": "Facebook", "href": "https://facebook.com", "icon": "/assets/icons/facebook.svg" },
+          { "platform": "Twitter", "href": "https://twitter.com", "icon": "/assets/icons/twitter.svg" },
+          { "platform": "Instagram", "href": "https://instagram.com", "icon": "/assets/icons/insta.svg" }
+        ]
       }
-    ],
-    "social": [
-      { "platform": "Facebook", "href": "https://facebook.com", "icon": "/public/assets/icons/facebook.svg" },
-      { "platform": "Twitter", "href": "https://twitter.com", "icon": "/assets/icons/twitter.svg" },
-      { "platform": "Instagram", "href": "https://instagram.com", "icon": "/assets/icons/insta.svg" }
     ],
     "copyright": "Copyright © 2025 MK Handmade Kitchens - All rights reserved",
     "disclaimer": "Handmade kitchen design, development & hosting by MK."
+  },
+
+   "notFound": {
+    "title": "Page Not Found",
+    "subtitle": "OOPS! SOMETHING WENT WRONG",
+    "message": "The page you're looking for doesn't exist or has been moved. Don't worry, let's help you find what you need.",
+    "errorCode": "404",
+    "backgroundImage": {
+      "src": "/assets/images/Hero-Image.png",
+      "alt": "Kitchen background for 404 page"
+    },
+    "suggestions": {
+      "title": "What would you like to do?",
+      "actions": [
+        {
+          "text": "Go to Homepage",
+          "href": "/",
+          "icon": "home",
+          "description": "Start fresh from our main page"
+        },
+        {
+          "text": "Browse Gallery",
+          "href": "/gallery",
+          "icon": "gallery",
+          "description": "Explore our kitchen designs"
+        },
+        {
+          "text": "Plan Kitchen",
+          "href": "/plan",
+          "icon": "plan",
+          "description": "Design your dream kitchen"
+        },
+        {
+          "text": "Contact Support",
+          "href": "/contact",
+          "icon": "support",
+          "description": "Get help from our team"
+        }
+      ]
+    },
+    "popularPages": {
+      "title": "Popular Pages",
+      "links": [
+        { "text": "Shop", "href": "/shop" },
+        { "text": "About Us", "href": "/about" },
+        { "text": "FAQ", "href": "/faq" },
+        { "text": "How to Buy", "href": "/how-to-buy" }
+      ]
+    }
   }
 }

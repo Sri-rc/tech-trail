@@ -8,6 +8,7 @@ import Footer from '@/components/layouts/Footer'
 
 export default async function HomePage() {
   // Fetch all content - future CMS integration point
+  const headerConten = await ContentManager.getHeaderContent()
   const heroContent = await ContentManager.getHeroContent()
   const aboutContent = await ContentManager.getAboutContent()
   const experienceContent = await ContentManager.getExperienceContent()
@@ -16,7 +17,7 @@ export default async function HomePage() {
 
   return (
     <main>
-      <Header />
+      <Header content={headerConten} />
       <HeroSection content={heroContent} />
       <AboutSection content={aboutContent} />
       <ExperienceSection content={experienceContent} />

@@ -1,9 +1,41 @@
 export interface SiteContent {
+  header: HeaderContent;
   hero: HeroContent;
   about: AboutContent;
   experience: ExperienceContent;
   gallery: GalleryContent;
   footer: FooterContent;
+  notFound: notFound;
+}
+
+export interface HeaderContent {
+  logo: {
+    src: string;
+    alt: string;
+    href: string;
+  };
+  navigation: {
+    left: NavigationLink[];
+    right: NavigationLink[];
+  };
+  social: SocialLink[];
+  cta: {
+    text: string;
+    cartIcon: {
+      src: string;
+      alt: string;
+    };
+  };
+  mobileMenu: {
+    toggleLabel: string;
+    openLabel: string;
+  };
+}
+
+export interface NavigationLink {
+  text: string;
+  href: string;
+  isExternal?: boolean;
 }
 
 export interface HeroContent {
@@ -14,29 +46,16 @@ export interface HeroContent {
     href: string;
   };
   backgroundImage: {
-    src: string;
-    alt: string;
+    desktop: {
+      src: string;
+      alt: string;
+    };
+    mobile: {
+      src: string;
+      alt: string;
+    };
   };
 }
-
-export interface FooterContent {
-  logo: string
-  sections: {
-    title: string
-    links: {
-      text: string
-      href: string
-    }[]
-  }[]
-  social: {
-    platform: string
-    href: string
-    icon: string
-  }[]
-  copyright: string
-  disclaimer: string
-}
-
 
 export interface AboutContent {
   image: {
@@ -44,7 +63,7 @@ export interface AboutContent {
     alt: string;
   };
   title: string;
-    subtitle: string;
+  subtitle: string;
   description: string;
   ctaButton: {
     text: string;
@@ -90,14 +109,14 @@ export interface GalleryImage {
 export interface FooterContent {
   logo: string;
   sections: FooterSection[];
-  social: SocialLink[];
   copyright: string;
   disclaimer: string;
 }
 
 export interface FooterSection {
   title: string;
-  links: FooterLink[];
+  links?: FooterLink[];
+  social?: SocialLink[];
 }
 
 export interface FooterLink {
@@ -109,4 +128,31 @@ export interface SocialLink {
   platform: string;
   href: string;
   icon: string;
+}
+
+export interface notFound {
+  title: string;
+  subtitle: string;
+  message: string;
+  errorCode: string;
+  backgroundImage: {
+    src: string;
+    alt: string;
+  };
+  suggestions: {
+    title: string;
+    actions: Array<{
+      text: string;
+      href: string;
+      icon: string;
+      description: string;
+    }>;
+  };
+  popularPages: {
+    title: string;
+    links: Array<{
+      text: string;
+      href: string;
+    }>;
+  };
 }

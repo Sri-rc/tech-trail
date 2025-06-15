@@ -1,158 +1,328 @@
-'use client'
-import { useState } from 'react'
-import Image from 'next/image'
-import Link from 'next/link'
+"use client";
+import { useState, useCallback, useEffect } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { HeaderContent } from "@/content/types";
 
-export default function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
+interface Props {
+  content: HeaderContent;
+}
+
+interface SocialIconProps {
+  platform: string;
+  href: string;
+  iconSrc: string;
+}
+
+interface NavigationProps {
+  links: Array<{ text: string; href: string }>;
+  className?: string;
+  onClick?: () => void;
+}
+
+interface CTAButtonProps {
+  text: string;
+  cartIcon: {
+    src: string;
+    alt: string;
+  };
+  className?: string;
+}
+
+// Social Icon Component - Reusable and accessible
+const SocialIcon = ({ platform, href, iconSrc }: SocialIconProps) => (
+  <Link
+    href={href}
+    className="hover:opacity-80 transition-opacity duration-300 focus:outline-none focus:ring-2 focus:ring-primary-gold focus:ring-offset-2 focus:ring-offset-transparent"
+    aria-label={`Visit our ${platform} page`}
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <Image
+      src={iconSrc}
+      alt={platform}
+      width={20}
+      height={20}
+      className="w-5 h-5"
+      loading="lazy"
+    />
+  </Link>
+);
+
+// Navigation Component - Reusable for both desktop and mobile
+const Navigation = ({ links, className = "", onClick }: NavigationProps) => (
+  <nav className={className} role="navigation">
+    {links.map((link, index) => (
+      <Link
+        key={`nav-${index}`}
+        href={link.href}
+        className="text-nav-base text-nav-sm md:text-nav-md lg:text-nav-lg hover:text-primary-gold-hover transition-colors focus:outline-none focus:text-primary-gold"
+        onClick={onClick}
+      >
+        {link.text}
+      </Link>
+    ))}
+  </nav>
+);
+
+// CTA Button Component - Reusable with cart icon
+const CTAButton = ({ text, cartIcon, className = "" }: CTAButtonProps) => (
+  <button className={`group flex items-center space-x-2 lg:space-x-3 px-4 lg:px-6 py-2 lg:py-3 border border-white text-white text-nav-base text-nav-sm md:text-nav-md lg:text-nav-lg hover:bg-white hover:text-neutral-text-dark transition-colors rounded-full focus:outline-none focus:ring-2 focus:ring-primary-gold focus:ring-offset-2 focus:ring-offset-transparent ${className}`}>
+    <span>{text}</span>
+    <Image
+      src={cartIcon.src}
+      alt={cartIcon.alt}
+      width={16}
+      height={16}
+      className="w-4 h-4 group-hover:brightness-100 group-hover:invert-0 transition-all"
+    />
+  </button>
+);
+
+// Mobile Menu Toggle Button - Accessible hamburger menu
+const MobileMenuToggle = ({ 
+  isOpen, 
+  onClick, 
+  toggleLabel 
+}: { 
+  isOpen: boolean; 
+  onClick: () => void; 
+  toggleLabel: string;
+}) => (
+  <button
+    className="lg:hidden focus:outline-none focus:ring-2 focus:ring-primary-gold focus:ring-offset-2 focus:ring-offset-transparent z-50 relative"
+    onClick={onClick}
+    aria-label={toggleLabel}
+    aria-expanded={isOpen}
+  >
+    <div className="w-6 h-6 flex flex-col justify-center">
+      <span className={`block w-full h-0.5 bg-white mb-1 transition-all duration-300 ${isOpen ? 'transform rotate-45 translate-y-1.5' : ''}`}></span>
+      <span className={`block w-full h-0.5 bg-white mb-1 transition-all duration-300 ${isOpen ? 'opacity-0' : ''}`}></span>
+      <span className={`block w-full h-0.5 bg-white transition-all duration-300 ${isOpen ? 'transform -rotate-45 -translate-y-1.5' : ''}`}></span>
+    </div>
+  </button>
+);
+
+// Close Button for Mobile Menu
+const CloseButton = ({ onClick }: { onClick: () => void }) => (
+  <button
+    onClick={onClick}
+    className="absolute top-6 right-6 p-2 text-white hover:text-primary-gold focus:outline-none focus:ring-2 focus:ring-primary-gold focus:ring-offset-2 focus:ring-offset-neutral-dark transition-colors"
+    aria-label="Close menu"
+  >
+    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+    </svg>
+  </button>
+);
+
+export default function Header({ content }: Props) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  // Memoized toggle handler for performance
+  const handleMenuToggle = useCallback(() => {
+    setIsMenuOpen(prev => !prev);
+  }, []);
+
+  const handleMobileNavClick = useCallback(() => {
+    setIsMenuOpen(false);
+  }, []);
+
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+
+    // Cleanup on unmount
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isMenuOpen]);
+
+  // Close menu on escape key
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isMenuOpen) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('keydown', handleEscape);
+    return () => document.removeEventListener('keydown', handleEscape);
+  }, [isMenuOpen]);
+
+  // Error boundary for missing content
+  if (!content) {
+    console.warn('Header: Missing required content data');
+    return null;
+  }
 
   return (
-    <header className="bg-transparent absolute top-0 left-0 right-0 z-50 pt-4 sm:pt-4 md:pt-5 lg:pt-7 pb-4 sm:pb-4 md:pb-5 lg:pb-7">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16 relative">
-          
-          {/* Left Section - Social Icons + Navigation */}
-          <div className="flex items-center space-x-8">
-            {/* Social Media Icons */}
-            <div className="hidden md:flex space-x-4">
-              <a href="#" className="hover:opacity-80 transition-opacity duration-300">
-                <span className="sr-only">Facebook</span>
-                <Image 
-                  src="/assets/icons/facebook.svg" 
-                  alt="Facebook" 
-                  width={20} 
-                  height={20}
-                  className="w-5 h-5"
+    <>
+      <header className="bg-transparent absolute top-0 left-0 right-0 z-50 pt-7 pb-7" role="banner">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-20 relative">
+            {/* Left Section - Social Icons + Navigation */}
+            <div className="hidden lg:flex items-center space-x-12 xl:space-x-20">
+              {/* Social Media Icons */}
+              {content.social && content.social.length > 0 && (
+                <div className="flex space-x-2" role="list">
+                  {content.social.map((social, index) => (
+                    <SocialIcon
+                      key={`social-${index}`}
+                      platform={social.platform}
+                      href={social.href}
+                      iconSrc={social.icon}
+                    />
+                  ))}
+                </div>
+              )}
+
+              {/* Left Navigation */}
+              {content.navigation?.left && (
+                <Navigation
+                  links={content.navigation.left}
+                  className="flex space-x-6 xl:space-x-8"
                 />
-              </a>
-              <a href="#" className="hover:opacity-80 transition-opacity duration-300">
-                <span className="sr-only">Twitter</span>
-                <Image 
-                  src="/assets/icons/twitter.svg" 
-                  alt="Twitter" 
-                  width={20} 
-                  height={20}
-                  className="w-5 h-5"
-                />
-              </a>
-              <a href="#" className="hover:opacity-80 transition-opacity duration-300">
-                <span className="sr-only">Instagram</span>
-                <Image 
-                  src="/assets/icons/insta.svg" 
-                  alt="Instagram" 
-                  width={20} 
-                  height={20}
-                  className="w-5 h-5"
-                />
-              </a>
+              )}
             </div>
 
-            {/* Left Navigation - Updated with base typography classes */}
-            <nav className="hidden md:flex space-x-8">
-              <a href="/shop" className="text-nav-base text-nav-sm md:text-nav-md lg:text-nav-lg hover:text-primary-gold-hover transition-colors">
-                SHOP
-              </a>
-              <a href="/plan" className="text-nav-base text-nav-sm md:text-nav-md lg:text-nav-lg hover:text-primary-gold-hover transition-colors">
-                PLAN MY KITCHEN
-              </a>
-            </nav>
-          </div>
+            {/* Center Logo */}
+            <div className="absolute left-1/2 transform -translate-x-1/2 lg:relative lg:left-auto lg:transform-none lg:flex-shrink-0">
+              <Link
+                href={content.logo.href}
+                className="block hover:opacity-90 transition-opacity focus:outline-none focus:ring-2 focus:ring-primary-gold focus:ring-offset-2 focus:ring-offset-transparent"
+                aria-label="Go to homepage"
+              >
+                <Image
+                  src={content.logo.src}
+                  alt={content.logo.alt}
+                  width={84}
+                  height={33}
+                  priority={true}
+                  quality={95}
+                  sizes="(max-width: 640px) 60px, (max-width: 768px) 70px, (max-width: 1024px) 80px, 84px"
+                  className="w-auto h-7 sm:h-8 md:h-8 lg:h-8 xl:h-8 2xl:h-8 object-contain"
+                />
+              </Link>
+            </div>
 
-          {/* Center Logo */}
-          <div className="absolute left-1/2 transform -translate-x-1/2">
-            <Link href="/" className="block hover:opacity-90 transition-opacity">
-              <Image 
-                src="/assets/images/mk-logo.png" 
-                alt="MHK - Modern Kitchen Solutions Logo" 
-                width={120}
-                height={48}
-                priority={true}
-                quality={95}
-                sizes="(max-width: 768px) 80px, 120px"
-                className="h-8 w-auto md:h-12 object-contain"
-                style={{
-                  maxWidth: '100%',
-                  height: 'auto',
-                }}
+            {/* Right Section - Navigation + CTA */}
+            <div className="hidden lg:flex items-center space-x-12 xl:space-x-20">
+              {/* Right Navigation */}
+              {content.navigation?.right && (
+                <Navigation
+                  links={content.navigation.right}
+                  className="flex space-x-6 xl:space-x-8"
+                />
+              )}
+
+              {/* CTA Button with Cart Icon */}
+              <CTAButton
+                text={content.cta.text}
+                cartIcon={content.cta.cartIcon}
               />
-            </Link>
+            </div>
+
+            {/* Mobile menu button */}
+            <MobileMenuToggle
+              isOpen={isMenuOpen}
+              onClick={handleMenuToggle}
+              toggleLabel={content.mobileMenu.toggleLabel}
+            />
           </div>
 
-          {/* Right Section - Navigation + CTA */}
-          <div className="flex items-center space-x-8">
-            {/* Right Navigation - Updated with base typography classes */}
-            <nav className="hidden md:flex space-x-8">
-              <a href="/about" className="text-nav-base text-nav-sm md:text-nav-md lg:text-nav-lg hover:text-primary-gold-hover transition-colors">
-                ABOUT US
-              </a>
-              <a href="/gallery" className="text-nav-base text-nav-sm md:text-nav-md lg:text-nav-lg hover:text-primary-gold-hover transition-colors">
-                GALLERY
-              </a>
-            </nav>
-
-            {/* CTA Button with Cart Icon - Updated with base typography classes */}
-            <div className="hidden md:block">
-              <button className="group flex items-center space-x-2 px-5 py-2 border border-white text-white text-nav-base text-nav-sm md:text-nav-md lg:text-nav-lg hover:bg-white hover:text-neutral-text-dark transition-colors rounded-full">
-                <span>MY ORDER</span>
-                <Image 
-                  src="/assets/images/shopping-cart.png" 
-                  alt="Shopping Cart" 
-                  width={16} 
-                  height={16}
-                  className="w-4 h-4 filter brightness-0 invert group-hover:brightness-100 group-hover:invert-0 transition-all"
-                />
-              </button>
-            </div>
-          </div>
-
-          {/* Mobile menu button */}
-          <button
-            className="md:hidden"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label="Toggle mobile menu"
-          >
-            <span className="sr-only">Open main menu</span>
-            <div className="w-6 h-6 flex flex-col justify-center">
-              <span className="block w-full h-0.5 bg-white mb-1 transition-all duration-300"></span>
-              <span className="block w-full h-0.5 bg-white mb-1 transition-all duration-300"></span>
-              <span className="block w-full h-0.5 bg-white transition-all duration-300"></span>
-            </div>
-          </button>
+          {/* Underline spanning content width */}
+          <div className="h-px opacity-50 bg-white mt-3" aria-hidden="true"></div>
         </div>
+      </header>
 
-        {/* Underline spanning content width - moved outside the flex container */}
-        <div className="h-px bg-gradient-to-r via-white mt-4 sm:mt-4 md:mt-5 lg:mt-7"></div>
-      </div>
-
-      {/* Mobile menu - Updated with base typography classes */}
+      {/* Mobile Menu Overlay */}
       {isMenuOpen && (
-        <div className="md:hidden bg-neutral-dark bg-opacity-90 backdrop-blur-sm">
-          <nav className="px-4 py-4 space-y-4">
-            <a href="/shop" className="block text-nav-base text-nav-sm hover:text-primary-gold-hover transition-colors">
-              SHOP
-            </a>
-            <a href="/plan" className="block text-nav-base text-nav-sm hover:text-primary-gold-hover transition-colors">
-              PLAN MY KITCHEN
-            </a>
-            <a href="/about" className="block text-nav-base text-nav-sm hover:text-primary-gold-hover transition-colors">
-              ABOUT US
-            </a>
-            <a href="/gallery" className="block text-nav-base text-nav-sm hover:text-primary-gold-hover transition-colors">
-              GALLERY
-            </a>
-            <button className="group flex items-center space-x-2 px-4 py-2 border border-white text-white text-nav-base text-nav-sm hover:bg-white hover:text-neutral-text-dark transition-colors rounded">
-              <span>MY ORDER</span>
-              <Image 
-                src="/assets/images/shopping-cart.png" 
-                alt="Shopping Cart" 
-                width={16} 
-                height={16}
-                className="w-4 h-4 filter brightness-0 invert group-hover:brightness-100 group-hover:invert-0 transition-all"
-              />
-            </button>
-          </nav>
-        </div>
+        <>
+          {/* Backdrop */}
+          <div 
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 lg:hidden"
+            onClick={handleMobileNavClick}
+            aria-hidden="true"
+          />
+          
+          {/* Mobile Menu */}
+          <div 
+            className="fixed inset-y-0 right-0 w-full max-w-sm bg-neutral-dark z-50 lg:hidden transform transition-transform duration-300 ease-in-out"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="mobile-menu-title"
+          >
+            <div className="flex flex-col h-full">
+              {/* Close Button */}
+              <CloseButton onClick={handleMobileNavClick} />
+              
+              {/* Menu Header */}
+              <div className="pt-16 pb-6 px-6 border-b border-white/10">
+                <h2 id="mobile-menu-title" className="text-nav-base text-nav-md text-white">
+                  Menu
+                </h2>
+              </div>
+
+              {/* Menu Content */}
+              <div className="flex-1 overflow-y-auto py-6">
+                <div className="px-6 space-y-8">
+                  {/* Left Navigation */}
+                  {content.navigation?.left && (
+                    <div>
+                      <Navigation
+                        links={content.navigation.left}
+                        className="flex flex-col space-y-4"
+                        onClick={handleMobileNavClick}
+                      />
+                    </div>
+                  )}
+                  
+                  {/* Right Navigation */}
+                  {content.navigation?.right && (
+                    <div>
+                      <Navigation
+                        links={content.navigation.right}
+                        className="flex flex-col space-y-4"
+                        onClick={handleMobileNavClick}
+                      />
+                    </div>
+                  )}
+
+                  {/* Mobile CTA Button */}
+                  <div className="pt-4">
+                    <CTAButton
+                      text={content.cta.text}
+                      cartIcon={content.cta.cartIcon}
+                      className="w-full justify-center"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Mobile Social Icons */}
+              {content.social && content.social.length > 0 && (
+                <div className="border-t border-white/10 p-6">
+                  <div className="flex justify-center space-x-6">
+                    {content.social.map((social, index) => (
+                      <SocialIcon
+                        key={`mobile-social-${index}`}
+                        platform={social.platform}
+                        href={social.href}
+                        iconSrc={social.icon}
+                      />
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </>
       )}
-    </header>
-  )
+    </>
+  );
 }

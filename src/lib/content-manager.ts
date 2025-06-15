@@ -15,6 +15,11 @@ export class ContentManager {
     return navigation
   }
 
+  static async getHeaderContent() {
+    const content = await this.getSiteContent()
+    return content.header
+  }
+
   static async getHeroContent() {
     const content = await this.getSiteContent()
     return content.hero
@@ -38,6 +43,11 @@ export class ContentManager {
   static async getFooterContent() {
     const content = await this.getSiteContent()
     return content.footer
+  }
+
+  static async getNotFoundContent() {
+    const content = await this.getSiteContent()
+    return content.notFound
   }
 }
 

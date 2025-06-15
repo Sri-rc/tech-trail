@@ -20,16 +20,25 @@ export default function HeroSection({ content }: Props) {
   return (
     <section className="relative min-h-screen flex items-center">
       <div className="absolute inset-0 z-0">
+        {/* Desktop Image */}
         <Image
-          src={content.backgroundImage.src}
-          alt={content.backgroundImage.alt}
+          src={content.backgroundImage.desktop.src}
+          alt={content.backgroundImage.desktop.alt}
           fill
-          className="object-cover"
+          className="object-cover hidden sm:block"
+          priority
+        />
+        {/* Mobile Image */}
+        <Image
+          src={content.backgroundImage.mobile.src}
+          alt={content.backgroundImage.mobile.alt}
+          fill
+          className="object-cover block sm:hidden"
           priority
         />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-16">
         {/* Subtitle - Helvetica Regular */}
 <p className="text-subtitle-sm md:text-subtitle-md lg:text-subtitle-lg mb-2 text-center">
   {content.subtitle}
@@ -41,7 +50,7 @@ export default function HeroSection({ content }: Props) {
           {formatTextWithLineBreaks(content.title)}
         </h1>
 
-        {/* Button - Enhanced with proper desktop styling */}
+        {/* Button */}
         <Button 
           variant="primary" 
           width="compact"
